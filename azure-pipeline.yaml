@@ -13,5 +13,23 @@ steps:
 - script: |
     npm install
     npm run build
-  displayName: 'npm install and build'
+  displayName: 'Build frontend'
   workingDirectory: frontend
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'Build backend'
+  workingDirectory: backend
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)\backend\dist'
+    Contents: **
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1 
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 107j_nieuwjaarsspel
+  displayName: 'Publish webapp'
