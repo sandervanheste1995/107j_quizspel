@@ -1,3 +1,4 @@
+import config from '@/config';
 import mutations from '@/store/mutations';
 import { GameState } from '@shared/GameState';
 import axios from 'axios';
@@ -9,8 +10,9 @@ export default class ApiService {
     socket: any;
 
     startSocket() {
-        this.socket = io('http://localhost:8080');
-        this.socket.on('GAMESTATE', (newState: GameState) => {
+        console.log('connecting to ' + config.backendUrl);
+        this.socket = io(config.backendUrl);
+        this.socket.on('GAMESTATE_CHANGED', (newState: GameState) => {
             this.store?.commit(mutations.setGamestate, newState);
         });
     }
@@ -19,7 +21,8 @@ export default class ApiService {
         return axios.get('/api/state');
     }
 
-    broadcastGamestate(newGamestate: GameState) {
-        this.socket.emit('SET_GAMESTATE', newGamestate);
+    async broadcastGamestate(newGamestate: GameState) {
+        await axios.post('/api/state', newGamestate);
+        this.socket.emit('GAMESTATE_CHANGED', newGamestate);
     }
 }

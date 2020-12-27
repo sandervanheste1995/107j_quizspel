@@ -28,8 +28,7 @@ const io = require('socket.io')(server, {
 
 io.on('connection', function(socket) {
   console.log(socket.id)
-  socket.on('SET_GAMESTATE', function(data) {
-    state.clientState = data;
-    io.emit('GAMESTATE', data);
+  socket.on('GAMESTATE_CHANGED', function() {
+    io.emit('GAMESTATE_CHANGED', state.clientState);
   });
 });
