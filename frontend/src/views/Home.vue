@@ -1,7 +1,8 @@
 <template>
   <div>
     <p>{{ gameState.viewName }}</p>
-    <button @click.native="changeGamestate">Verander de gamestate</button>
+    <button @click="changeGamestate">Verander de gamestate</button>
+    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -11,6 +12,9 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default Vue.extend({
   name: 'Home',
+  data: () => ({
+    message: ''
+  }),
   computed: {
     ...mapGetters(['gameState'])
   },
@@ -20,6 +24,7 @@ export default Vue.extend({
       this.broadcastGameState({
         viewName: this.gameState.viewName === 'Home' ? 'WoordenMinigame' : 'Home'
       });
+      this.message = 'Bericht verzonden!'
     }
   },
   created () {
