@@ -1,3 +1,3 @@
 export default {
-    setMessage: 'SET_MESSAGE'
+    setGamestate: 'SET_GAMESTATE'
 }

@@ -1,25 +1,29 @@
 <template>
   <div>
-    <p>{{ message }}</p>
+    <p>{{ gameState.viewName }}</p>
+    <button @click="changeGamestate">Change game state</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default Vue.extend({
   name: 'Home',
   computed: {
-    ...mapState({
-      message: 'message'
-    })
+    ...mapGetters(['gameState'])
   },
   methods: {
-    ...mapActions(['getMessage']),
+    ...mapActions(['getGameState', 'broadcastGameState']),
+    changeGamestate() {
+      this.broadcastGameState({
+        viewName: this.gameState.viewName === 'Home' ? 'WoordenMinigame' : 'Home'
+      });
+    }
   },
   created () {
-   this.getMessage();
+   this.getGameState();
   }
 });
 </script>

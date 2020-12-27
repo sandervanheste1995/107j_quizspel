@@ -1,25 +1,45 @@
 import ApiService from '@/services/apiService';
+import { GameState } from '@shared/GameState';
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { StoreOptions } from 'vuex'
 import mutations from './mutations';
+import { StoreState } from './store-model';
 
 Vue.use(Vuex)
 
 const apiService = new ApiService();
 
-export default new Vuex.Store({
+const storeObject: StoreOptions<StoreState> = {
   strict: true,
   state: {
-    message: ''
+    gameState: {
+      viewName: 'Home'
+    }
+  },
+  getters: {
+    gameState: state => state.gameState
   },
   mutations: {
-    [mutations.setMessage] (state, message) {
-      state.message = message;
+    [mutations.setGamestate] (state, newGameState: GameState) {
+      state.gameState = newGameState;
     }
   },
   actions: {
-    async getMessage({ commit }) {
-      commit(mutations.setMessage, (await apiService.getMessage()).data.message);
+    async getGameState ({commit}) {
+      const res = (await apiService.getGameState());
+
+      if (res.status === 200) {
+        commit(mutations.setGamestate, res.data);
+      }
+    },
+    broadcastGameState(_, gameState: GameState) {
+        apiService.broadcastGamestate(gameState);
     }
   }
-})
+};
+
+const store = new Vuex.Store<StoreState>(storeObject);
+apiService.store = store;
+apiService.startSocket();
+
+export default store;

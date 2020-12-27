@@ -1,3 +1,4 @@
+import { state } from './state/gameState';
 const express = require('express');
 const path = require('path');
 const app = express(),
@@ -14,6 +15,21 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname, 'frontend/index.html'));
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server listening on the port::${port}`);
+});
+
+const io = require('socket.io')(server, {
+  cors: {
+    origin: "http://localhost:8081",
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on('connection', function(socket) {
+  console.log(socket.id)
+  socket.on('SET_GAMESTATE', function(data) {
+    state.clientState = data;
+    io.emit('GAMESTATE', data);
+  });
 });
