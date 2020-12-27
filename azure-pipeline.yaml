@@ -22,13 +22,7 @@ steps:
   displayName: 'Build backend'
   workingDirectory: backend
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/backend/dist'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1 
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 107j_nieuwjaarsspel
-  displayName: 'Publish webapp'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/backend/dist'
+    includeRootFolder: false
