@@ -1,34 +1,21 @@
 <template>
-  <div>
-    <p>{{ gameState.viewName }}</p>
-    <button @click="changeGamestate">Verander de gamestate</button>
-    <p>{{ message }}</p>
+  <div class="centered-content">
+    <h1 class="title">Welkom bij het 107J Nieuwjaarsspel!</h1>
+    <b-icon
+      pack="fas"
+      icon="glass-cheers"
+      size="is-large">
+    </b-icon>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default Vue.extend({
-  name: 'Home',
-  data: () => ({
-    message: ''
-  }),
-  computed: {
-    ...mapGetters(['gameState'])
-  },
-  methods: {
-    ...mapActions(['getGameState', 'broadcastGameState']),
-    changeGamestate() {
-      this.broadcastGameState({
-        viewName: this.gameState.viewName === 'Home' ? 'WoordenMinigame' : 'Home'
-      });
-      this.message = 'Bericht verzonden!'
-    }
-  },
-  created () {
-   this.getGameState();
-  }
+  name: 'Home'
 });
 </script>
+
+<style lang="scss" scoped>
+</style>
