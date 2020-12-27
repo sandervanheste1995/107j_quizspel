@@ -7,11 +7,12 @@
 <style>
 .wrapper, html, body, #app {
     height: 100%;
-    margin: 0;
+    margin: 0 auto;
 }
 
 * {
   text-align: center;
+  user-select: none;
 }
 
 .centered-content {

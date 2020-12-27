@@ -1,9 +1,7 @@
+import config from '../config';
 import { GameState } from "../shared/GameState";
+const fs = require('fs');
 
 export const state: { 
     clientState: GameState
-} = {
-    clientState: {
-        viewName: 'Home'
-    }
-};
+} = JSON.parse(fs.readFileSync(config.gameStateSavefile));

@@ -1,6 +1,9 @@
+import config from './config';
 import { state } from './state/gameState';
+
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express(),
       bodyParser = require("body-parser"),
       port = 8080;
@@ -32,3 +35,8 @@ io.on('connection', function(socket) {
     io.emit('GAMESTATE_CHANGED', state.clientState);
   });
 });
+
+setInterval(function() {
+  fs.writeFileSync('./savedGamestate.json', JSON.stringify(state, null, 4) , 'utf-8');
+  console.log('Saved game state.');
+}, config.saveGamestateInterval);
