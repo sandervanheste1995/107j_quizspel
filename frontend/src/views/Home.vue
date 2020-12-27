@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ gameState.viewName }}</p>
-    <button @click="changeGamestate">Change game state</button>
+    <button @click.native="changeGamestate">Verander de gamestate</button>
   </div>
 </template>
 
