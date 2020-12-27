@@ -20,10 +20,7 @@ const server = app.listen(port, () => {
 });
 
 const io = require('socket.io')(server, {
-  cors: {
-    origin: "http://localhost:8081",
-    methods: ["GET", "POST"]
-  }
+  origins: ['http://107j.nl', 'http://localhost:8081']
 });
 
 io.on('connection', function(socket) {
