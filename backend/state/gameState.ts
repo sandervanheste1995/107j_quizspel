@@ -1,24 +1,14 @@
 import config from '../config';
-import { GameState, teamCount } from "../shared/GameState";
+import { GameState } from "../shared/GameState";
 const fs = require('fs');
 
-const defaultState = {
-    minigameIndex: -1,
-    minigameStack: [],
-    clientState: {
-        teams: [],
-        viewName: 'Home',
-    }
+export interface ServerState {
+    minigameIndex: number;
+    minigameStack: any[];
+    clientState: GameState;
 };
 
-for(var i = 0; i < teamCount; ++i) {
-    defaultState.clientState.teams.push([]);
-}
-
-export const state: { 
-    minigameIndex: number,
-    minigameStack: any[],
-    clientState: GameState
-} = fs.existsSync(config.gameStateSavefile) 
+export const state: ServerState = 
+    fs.existsSync(config.gameStateSavefile) 
     ? JSON.parse(fs.readFileSync(config.gameStateSavefile))
-    : defaultState;
+    : JSON.parse(fs.readFileSync(config.defaultGameStateFile));

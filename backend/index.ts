@@ -34,6 +34,6 @@ io.on('connection', function(socket) {
 });
 
 setInterval(function() {
-  fs.writeFileSync('./savedGamestate.json', JSON.stringify(state, null, 4) , 'utf-8');
+  fs.writeFileSync(config.gameStateSavefile, JSON.stringify(state, null, 4) , 'utf-8');
   console.log('Saved game state.');
 }, config.saveGamestateInterval);

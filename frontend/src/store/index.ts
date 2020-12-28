@@ -28,6 +28,10 @@ const storeObject: StoreOptions<StoreState> = {
       return state.gameState.minigameData?.scores
       .reduce((acc, s) => getters.teamNumberByPlayerId(s.playerId) === state.team ? acc + s.score : 0, 0);
     },
+    teamsEmpty: (state) => !state.gameState.teams?.filter(t => t.length > 0).length,
+    teamCount: (state) => {
+      return state.gameState.teams.length;
+    },
     teamScoreByTeamnumber: (state, getters) => (team: number) => {
       return state.gameState.minigameData?.scores
       .reduce((acc, s) => getters.teamNumberByPlayerId(s.playerId) === team ? acc + s.score : 0, 0);
@@ -49,6 +53,9 @@ const storeObject: StoreOptions<StoreState> = {
     }
   },
   actions: {
+    async setNumberOfTeams(_, numberOfTeams: number) {
+      await apiService.setNumberOfTeams(numberOfTeams);
+    },
     async setPlayer () {
       await apiService.setPlayer();
     },
@@ -58,6 +65,14 @@ const storeObject: StoreOptions<StoreState> = {
       if (res.status === 200) {
         commit(mutations.setGamestate, res.data);
       }
+    },
+    async reset () {
+      await apiService.reset();
+    },
+    async resetClient () {
+      localStorage.removeItem('name');
+      localStorage.removeItem('team');
+      window.location.reload();
     },
     async getMinigames () {
       return await apiService.getMinigames();

@@ -1,4 +1,5 @@
 export default {
     saveGamestateInterval: 30000,
-    gameStateSavefile: './savedGamestate.json'
+    gameStateSavefile: './state/savedGamestate.json',
+    defaultGameStateFile: './state/defaultState.json'
 }

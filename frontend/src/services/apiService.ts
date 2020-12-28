@@ -12,8 +12,12 @@ export default class ApiService {
     startSocket() {
         console.log('connecting to ' + config.backendUrl);
         this.socket = io(config.backendUrl);
-        this.socket.on('GAMESTATE_CHANGED', (newState: GameState) => {
-            this.store?.commit(mutations.setGamestate, newState);
+        this.socket.on('GAMESTATE_CHANGED', (newState: any) => {
+            if (newState.reset) {
+                this.store?.dispatch('resetClient');
+            } else if(newState.viewName) {
+                this.store?.commit(mutations.setGamestate, newState);
+            }
         });
     }
     
@@ -23,8 +27,16 @@ export default class ApiService {
         }
     }
 
+    async setNumberOfTeams (numberOfTeams: number) {
+        await axios.post('/api/setNumberOfTeams', { numberOfTeams });
+    }
+
     async getGameState() {
         return axios.get('/api/state');
+    }
+
+    async reset() {
+        await axios.post('api/reset');
     }
 
     async getMinigames() {

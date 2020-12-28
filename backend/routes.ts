@@ -1,9 +1,11 @@
+import config from './config';
 import { io } from './index';
 import { state } from './state/gameState';
 import express from 'express';
 import minigames from './resources/minigames';
 import woordenspelRoutes from './minigames/woordenspel.routes';
 import * as _ from 'underscore';
+const fs = require('fs');
 
 const routes = express.Router({ mergeParams: true });
 
@@ -11,9 +13,15 @@ routes.get('/state', (_,res) => {
     res.json(state.clientState);
 });
 
-routes.post('/state', (req, res) => {
-    state.clientState = req.body;
-    io.emit('GAMESTATE_CHANGED', state.clientState);
+routes.post('/reset', (_, res) => {
+    const defaultState = JSON.parse(fs.readFileSync(config.defaultGameStateFile));
+    state.clientState = defaultState.clientState;
+    state.minigameIndex = defaultState.minigameIndex;
+    state.minigameStack = defaultState.minigameStack;
+    if (fs.existsSync(config.gameStateSavefile)) {
+        fs.unlinkSync(config.gameStateSavefile);
+    }
+    io.emit('GAMESTATE_CHANGED', { reset: true });
     res.status(204).send();
 });
 
@@ -23,6 +31,17 @@ routes.post('/setPlayer', (req, res) => {
         state.clientState.teams[req.body.team - 1].push(req.body.name);
     }
     io.emit('GAMESTATE_CHANGED', state.clientState);
+    res.status(204).send();
+});
+
+routes.post('/setNumberOfTeams', (req, res) => {
+    if(state.clientState.teams.length !== req.body.numberOfTeams) {
+        state.clientState.teams = [];
+        for (var i = 0; i < req.body.numberOfTeams; ++i) {
+            state.clientState.teams.push([]);
+        }
+        io.emit('GAMESTATE_CHANGED', state.clientState);
+    };
     res.status(204).send();
 });
 

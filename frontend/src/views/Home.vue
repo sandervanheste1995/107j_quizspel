@@ -39,20 +39,18 @@ import Vue from 'vue';
 import { mapGetters } from 'vuex';
 import RaadDeWoorden from './minigames/RaadDeWoorden.vue';
 import mutations from '@/store/mutations';
-import { teamCount } from '../../../backend/shared/GameState';
 
 export default Vue.extend({
   name: 'Home',
   data: () => ({
     name: '',
-    team: 1,
-    teamCount
+    team: 1
   }),
   components: {
     RaadDeWoorden
   },
   computed: {
-    ...mapGetters(['gameState'])
+    ...mapGetters(['gameState', 'teamCount'])
   },
   methods: {
     setNameTeam () {

@@ -16,16 +16,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import {mapGetters} from 'vuex';
-import { teamCount } from '../../../backend/shared/GameState';
 import RaadDeWoordenBoard from './boards/RaadDeWoordenBoard.vue';
 
 export default Vue.extend({
   components: { RaadDeWoordenBoard },
-    data: () => ({
-        teamCount
-    }),
     computed: {
-        ...mapGetters(['gameState', 'minigame', 'teamScoreByTeamnumber'])
+        ...mapGetters(['gameState', 'minigame', 'teamScoreByTeamnumber', 'teamCount'])
     }
 });
 </script>

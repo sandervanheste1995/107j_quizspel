@@ -10,5 +10,3 @@ export interface GameState {
         extraData: any;
     };
 }
-
-export const teamCount = 3;

@@ -1,0 +1,12 @@
+{
+    "minigameIndex": -1,
+    "minigameStack": [],
+    "clientState": {
+        "teams": [
+            [],
+            [],
+            []
+        ],
+        "viewName": "Home"
+    }
+}

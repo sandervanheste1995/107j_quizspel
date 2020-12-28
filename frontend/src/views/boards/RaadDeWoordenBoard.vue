@@ -13,16 +13,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { teamCount } from '../../../../backend/shared/GameState';
 import { mapGetters } from 'vuex';
 import sounds from '@/assets/sounds/loaded-sounds';
 
 export default Vue.extend({
-    data: () => ({
-        teamCount
-    }),
     computed: {
-        ...mapGetters(['minigame', 'teamNumberByPlayerId']),
+        ...mapGetters(['minigame', 'teamNumberByPlayerId', 'teamCount']),
         doneWords (): {playerId: string; word: string}[] {
             return this.minigame?.extraData?.doneWords || [];
         }
