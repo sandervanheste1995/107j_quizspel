@@ -2,7 +2,7 @@ export interface GameState {
     viewName: 'Home' | 'Woordenspel';
     teams: string[][];
     minigameData?: {
-        id: number,
+        id: number;
         name: string;
         description: string;
         scores: {playerId: string; score: number}[];
