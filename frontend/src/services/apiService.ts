@@ -65,4 +65,28 @@ export default class ApiService {
         }
         return {success: false, message: 'Fout bij het checken'};
     }
+
+    // Quiz minigame
+    async quizSchermDelta(delta: number) {
+        await axios.post('api/quiz/schermDelta', { delta });
+    }
+
+    async quizAnswer(answer: number | string, name: string) {
+        const res = await axios.post('/api/quiz/answer', { answer, name });
+
+        if(res.status === 200) {
+            return res.data;
+        }
+        return {success: false, message: 'Fout bij het checken'};
+    }
+
+    async getQuizAnswer() {
+        const res = await axios.get('/api/quiz/answer');
+
+        if(res.status === 200) {
+            return res.data;
+        }
+
+        return undefined;
+    }
 }

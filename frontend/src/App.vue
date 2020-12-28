@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="container">
       <router-view />
+      <p class="team-overlay" v-if="team">Team {{ team }}</p>
   </div>
 </template>
 
@@ -15,6 +16,11 @@ export default Vue.extend({
     setInterval(() => {
       this.$store.dispatch('getGameState');
     }, 8000);
+  },
+  computed: {
+    team () {
+      return this.$store.state.team;
+    }
   }
 });
 </script>
@@ -33,8 +39,22 @@ p, h1, h2, h3 {
   color: white !important;
 }
 
+input {
+  padding: 0.35rem;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .error {
   color: darkred !important;
+  font-weight: bold;
+}
+
+.team-overlay {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  color: white;
   font-weight: bold;
 }
 
@@ -66,5 +86,11 @@ p, h1, h2, h3 {
 }
 .list-slide-enter, .list-slide-leave-to  {
   transform: translateY(100vh);
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

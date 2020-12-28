@@ -9,6 +9,7 @@
                 </div>
             </div>
             <raad-de-woorden-board v-if="gameState.viewName === 'Woordenspel'" class="minigame" />
+            <quiz-board v-if="gameState.viewName === 'Quiz'" class="minigame" />
         </div>
     </div>
 </template>
@@ -17,9 +18,13 @@
 import Vue from 'vue';
 import {mapGetters} from 'vuex';
 import RaadDeWoordenBoard from './boards/RaadDeWoordenBoard.vue';
+import QuizBoard from './boards/QuizBoard.vue';
 
 export default Vue.extend({
-  components: { RaadDeWoordenBoard },
+    components: { 
+      RaadDeWoordenBoard,
+      QuizBoard
+    },
     computed: {
         ...mapGetters(['gameState', 'minigame', 'teamScoreByTeamnumber', 'teamCount'])
     }
@@ -34,9 +39,10 @@ export default Vue.extend({
     left: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    
     .scores {
         display: flex;
         align-self: center;

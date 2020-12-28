@@ -1,6 +1,5 @@
 <template>
     <div class="raad-woorden-content">
-
         <template v-if="!minigame.started">
             <h1 class="title">{{ minigame.name }}</h1>
             <p>{{ minigame.description }}</p>

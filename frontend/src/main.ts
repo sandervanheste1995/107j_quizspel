@@ -6,12 +6,12 @@ import store from './store'
 import Buefy from 'buefy'
 import '@/assets/buefy.scss'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faGlassCheers } from '@fortawesome/free-solid-svg-icons'
+import { faGlassCheers, faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
 
-library.add(faGlassCheers)
+library.add(faGlassCheers, faCheckCircle, faTimesCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Buefy, {

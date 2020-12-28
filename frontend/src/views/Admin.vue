@@ -31,6 +31,12 @@
                     </option>
                 </b-select>
             </b-field>
+
+            <div v-if="gameState.viewName === 'Quiz'">
+                <b-button @click="() => quizSchermDelta(-1)" class="m-2" type="is-info">Vorige scherm</b-button>
+                <b-button @click="() => quizSchermDelta(1)" class="m-2" type="is-info">Volgende scherm</b-button>
+            </div>
+
             <b-button @click="resetSpel" class="resetButton" type="is-danger">Reset spel</b-button>
         </div>
     </div>
@@ -70,6 +76,10 @@ export default Vue.extend({
             if(result){
                 this.$store.dispatch('reset');
             }
+        },
+        // minigame-specifieke knoppen
+        quizSchermDelta (delta: number) {
+            this.$store.dispatch('quizSchermDelta', delta);
         }
     }
 });

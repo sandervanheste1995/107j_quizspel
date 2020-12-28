@@ -1,5 +1,5 @@
 export interface GameState {
-    viewName: 'Home' | 'Woordenspel';
+    viewName: 'Home' | 'Woordenspel' | 'Quiz';
     teams: string[][];
     minigameData?: {
         id: number;

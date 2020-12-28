@@ -2,13 +2,9 @@ import { state } from './../state/gameState';
 import express from "express";
 import minigames from '../resources/minigames';
 import { io } from '../index';
+import { addToTeamScore, isInWords } from '../helpers/scores';
 
 const routes = express.Router({ mergeParams: true });
-
-function isInWords(words: string[], word: string): boolean {
-    const stripped = word.toLowerCase().replace(/ /g,'')
-    return words.filter(w => stripped.includes(w.toLowerCase())).length > 0;
-}
 
 routes.post('/try', (req,res) => {
     if (!state.clientState.minigameData) {
@@ -43,13 +39,7 @@ routes.post('/try', (req,res) => {
         playerId: req.body.name
     });
 
-    let playerScore = state.clientState.minigameData.scores.find(s => s.playerId.toLowerCase().trim() === req.body.name.toLowerCase().trim());
-
-    if(!playerScore) {
-        state.clientState.minigameData.scores.push({ playerId: req.body.name, score: 0 });
-        playerScore = state.clientState.minigameData.scores[state.clientState.minigameData.scores.length - 1];
-    }
-    playerScore.score += 5;
+    addToTeamScore(req.body.name, 5);
     
     io.emit('GAMESTATE_CHANGED', state.clientState);
     res.json({ success: true });

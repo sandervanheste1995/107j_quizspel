@@ -97,6 +97,17 @@ const storeObject: StoreOptions<StoreState> = {
         return;
       }
       return await apiService.tryWord(word, state.name);
+    },
+
+    // Quiz
+    async quizSchermDelta(_, delta: number) {
+      await apiService.quizSchermDelta(delta);
+    },
+    async quizAnswer({ state }, answer: number | string) {
+      return await apiService.quizAnswer(answer, state.name);
+    },
+    async getQuizAnswer() {
+      return await apiService.getQuizAnswer();
     }
   }
 };

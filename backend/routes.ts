@@ -4,6 +4,7 @@ import { state } from './state/gameState';
 import express from 'express';
 import minigames from './resources/minigames';
 import woordenspelRoutes from './minigames/woordenspel.routes';
+import quizRoutes, { loadCurrentQuizScreen } from './minigames/quiz.routes';
 import * as _ from 'underscore';
 const fs = require('fs');
 
@@ -11,6 +12,10 @@ const routes = express.Router({ mergeParams: true });
 
 routes.get('/state', (_,res) => {
     res.json(state.clientState);
+});
+
+routes.get('/serverstate', (_,res) => {
+    res.json(state);
 });
 
 routes.post('/reset', (_, res) => {
@@ -59,9 +64,17 @@ routes.post('/minigames', (req, res) => {
         started: false,
         extraData: { }
     };
+
+    if (minigame.type === 'Quiz') {
+        state.clientState.minigameData.extraData.screenIndex = 0;
+        state.clientState.minigameData.extraData.teamsAnswered = [];
+        state.clientState.minigameData.extraData.currentScreen = { };
+        loadCurrentQuizScreen();
+    }
+
     state.minigameIndex = state.minigameStack.length;
     state.minigameStack.push(state.clientState.minigameData);
-    state.clientState.viewName = minigame.type as 'Woordenspel';
+    state.clientState.viewName = minigame.type as 'Woordenspel' | 'Quiz';
     io.emit('GAMESTATE_CHANGED', state.clientState);
     res.status(204).send();
 });
@@ -85,5 +98,6 @@ routes.post('/minigame/stop', (_, res) => {
 });
 
 routes.use('/woordenspel', woordenspelRoutes);
+routes.use('/quiz', quizRoutes);
 
 export default routes;
