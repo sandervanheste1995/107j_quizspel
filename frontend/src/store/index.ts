@@ -22,19 +22,23 @@ const storeObject: StoreOptions<StoreState> = {
   getters: {
     gameState: state => state.gameState,
     minigame: state => state.gameState.minigameData,
-    teamNumber: state => state.gameState.teams.findIndex(t => t.find(p => p === state.name)) + 1,
+    teamNumber: (state, getters) => getters.teamNumberByPlayerId(state.name),
     teamNumberByPlayerId: state => (playerId: string) => state.gameState.teams.findIndex(t => t.find(p => p === playerId)) + 1,
     teamScore: (state, getters) => {
-      return state.gameState.minigameData?.scores
-      .reduce((acc, s) => getters.teamNumberByPlayerId(s.playerId) === state.team ? acc + s.score : 0, 0);
+      return getters.teamScoreByTeamnumber(state.team);
     },
     teamsEmpty: (state) => !state.gameState.teams?.filter(t => t.length > 0).length,
     teamCount: (state) => {
       return state.gameState.teams.length;
     },
     teamScoreByTeamnumber: (state, getters) => (team: number) => {
-      return state.gameState.minigameData?.scores
-      .reduce((acc, s) => getters.teamNumberByPlayerId(s.playerId) === team ? acc + s.score : 0, 0);
+      let accScore = 0;
+      state.gameState.minigameData?.scores.forEach(score => {
+        if(getters.teamNumberByPlayerId(score.playerId) === team) {
+          accScore += score.score;
+        }
+      });
+      return accScore;
     }
   },
   mutations: {
