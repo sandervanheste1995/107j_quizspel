@@ -23,7 +23,7 @@ export default Vue.extend({
     }),
     computed: {
         ...mapGetters(['minigame', 'teamNumberByPlayerId']),
-        doneWords () {
+        doneWords (): {playerId: string; word: string}[] {
             return this.minigame?.extraData?.doneWords || [];
         }
     },
