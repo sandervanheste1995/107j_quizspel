@@ -12,12 +12,20 @@ steps:
 
 - script: |
     npm install
+  displayName: 'npm Install frontend'
+  workingDirectory: frontend
+
+- script: |
+    npm install
+  displayName: 'npm Install backend'
+  workingDirectory: backend
+
+- script: |
     npm run build
   displayName: 'Build frontend'
   workingDirectory: frontend
 
 - script: |
-    npm install
     npm run build
   displayName: 'Build backend'
   workingDirectory: backend

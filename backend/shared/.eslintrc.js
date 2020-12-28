@@ -1,12 +1,10 @@
 module.exports = {
-  root: true,
+  root: false,
   env: {
     node: true
   },
   'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended'
+    'eslint:recommended'
   ],
   parserOptions: {
     ecmaVersion: 2020
