@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
-import Board from '../views/Board.vue';
-import Admin from '../views/Admin.vue';
 
 Vue.use(VueRouter)
 
@@ -10,17 +7,17 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
   },
   {
     path: '/admin',
     name: 'Admin',
-    component: Admin
+    component: () => import(/* webpackChunkName: "admin" */ '../views/Admin.vue')
   },
   {
     path: '/board',
     name: 'Board',
-    component: Board
+    component: () => import(/* webpackChunkName: "board" */ '../views/Board.vue')
   }
 ]
 
