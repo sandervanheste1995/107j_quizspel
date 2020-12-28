@@ -54,6 +54,15 @@ routes.get('/minigames', (_, res) => {
     res.json(minigames.map(m => ({id: m.id, type: m.type, name: m.name})));
 });
 
+routes.post('/setminigames', (req, res) => {
+    minigames.splice(0, minigames.length);
+    for(var i = 0; i < req.body.length; ++i) {
+        minigames.push(req.body[i]);
+    }
+    fs.writeFileSync(config.minigamesSavefile, JSON.stringify(minigames, null, 4) , 'utf-8');
+    res.status(204).send();
+});
+
 routes.post('/minigames', (req, res) => {
     const minigame = minigames.find(m => m.id === req.body.id);
     state.clientState.minigameData = {

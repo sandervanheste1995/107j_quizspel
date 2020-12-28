@@ -1,4 +1,7 @@
-const minigames = [
+import config from '../config';
+const fs = require('fs');
+
+const minigames = fs.existsSync(config.minigamesSavefile) ? JSON.parse(fs.readFileSync(config.minigamesSavefile)) : [
     {
         id: 1,
         type: 'Woordenspel',

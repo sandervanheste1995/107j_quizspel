@@ -2,3 +2,4 @@ node_modules
 dist
 defaultState.json
 savedGamestate.json
+minigames.json
