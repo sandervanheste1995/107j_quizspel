@@ -131,6 +131,11 @@ export default Vue.extend({
             this.pending = false;
             this.success = result?.success;
         }
+    },
+    watch: {
+        currentScreen () {
+            this.submitted = false;
+        }
     }
 });
 </script>
