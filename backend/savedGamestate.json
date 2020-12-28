@@ -1,4 +1,28 @@
 {
+    "minigameIndex": 0,
+    "minigameStack": [
+        {
+            "id": 1,
+            "name": "Raad de maanden",
+            "description": "Typ zoveel mogelijk maanden in. Voor elke maand die je als eerste raadt, krijgt je team 10 euro.",
+            "scores": [
+                {
+                    "playerId": "asegasegga",
+                    "teamId": 1,
+                    "score": 40
+                }
+            ],
+            "started": false,
+            "extraData": {
+                "doneWordsIdx": [
+                    0,
+                    1,
+                    2,
+                    3
+                ]
+            }
+        }
+    ],
     "clientState": {
         "viewName": "Home"
     }

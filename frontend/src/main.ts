@@ -1,3 +1,4 @@
+import mutations from '@/store/mutations';
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -21,5 +22,6 @@ Vue.use(Buefy, {
 new Vue({
   router,
   store,
+  beforeCreate() { this.$store.commit(mutations.loadUser) },
   render: h => h(App)
 }).$mount('#app')

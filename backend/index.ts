@@ -22,7 +22,7 @@ const server = app.listen(port, () => {
     console.log(`Server listening on the port::${port}`);
 });
 
-const io = require('socket.io')(server, {
+export const io = require('socket.io')(server, {
   cors: {
     origins: ['https://107j.nl', 'http://localhost:8081', 'https://localhost:8081', 'http://107j.nl'],
     methods: ['GET', 'POST', 'PUT']
@@ -31,9 +31,6 @@ const io = require('socket.io')(server, {
 
 io.on('connection', function(socket) {
   console.log(socket.id)
-  socket.on('GAMESTATE_CHANGED', function() {
-    io.emit('GAMESTATE_CHANGED', state.clientState);
-  });
 });
 
 setInterval(function() {

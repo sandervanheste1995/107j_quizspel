@@ -21,8 +21,34 @@ export default class ApiService {
         return axios.get('/api/state');
     }
 
+    async getMinigames() {
+        const res = await axios.get('/api/minigames');
+        return res.status === 200 ? res.data : [];
+    }
+
+    async laadMinigame(id: number) {
+        await axios.post('/api/minigames', { id });
+    }
+
+    async startPauzeMinigame() {
+        await axios.post('api/minigame/toggle');
+    }
+
+    async stopMinigame() {
+        await axios.post('api/minigame/stop');
+    }
+
     async broadcastGamestate(newGamestate: GameState) {
         await axios.post('/api/state', newGamestate);
-        this.socket.emit('GAMESTATE_CHANGED', newGamestate);
+    }
+    
+    // Woorden minigame
+    async tryWord(word: string, name: string, team: number) {
+        const res = await axios.post('/api/woordenspel/try', { word, name, team });
+
+        if(res.status === 200) {
+            return res.data;
+        }
+        return {success: false, message: 'Fout bij het checken'};
     }
 }
