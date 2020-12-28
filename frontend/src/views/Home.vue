@@ -15,7 +15,7 @@
         <b-field label="Je team" class="pb-5">
           <b-select placeholder="Selecteer een team" v-model="team">
             <option 
-                v-for="team in [1, 2, 3]"
+                v-for="team in teamCount"
                 :value="team"
                 :key="team">
                 {{ 'Team ' + ' ' + team }}
@@ -38,13 +38,15 @@
 import Vue from 'vue';
 import { mapGetters } from 'vuex';
 import RaadDeWoorden from './minigames/RaadDeWoorden.vue';
-import mutations from '../store/mutations';
+import mutations from '@/store/mutations';
+import { teamCount } from '../../../backend/shared/GameState';
 
 export default Vue.extend({
   name: 'Home',
   data: () => ({
     name: '',
-    team: 1
+    team: 1,
+    teamCount
   }),
   components: {
     RaadDeWoorden
@@ -55,6 +57,7 @@ export default Vue.extend({
   methods: {
     setNameTeam () {
       this.$store.commit(mutations.setUser, { name: this.name, team: this.team });
+      this.$store.dispatch('setPlayer');
     }
   }
 });

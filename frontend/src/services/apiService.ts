@@ -17,6 +17,12 @@ export default class ApiService {
         });
     }
     
+    async setPlayer() {
+        if (this.store?.state.name) {
+            await axios.post('/api/setPlayer',{name: this.store.state.name, team: this.store.state.team });
+        }
+    }
+
     async getGameState() {
         return axios.get('/api/state');
     }
@@ -38,13 +44,9 @@ export default class ApiService {
         await axios.post('api/minigame/stop');
     }
 
-    async broadcastGamestate(newGamestate: GameState) {
-        await axios.post('/api/state', newGamestate);
-    }
-    
     // Woorden minigame
-    async tryWord(word: string, name: string, team: number) {
-        const res = await axios.post('/api/woordenspel/try', { word, name, team });
+    async tryWord(word: string, name: string) {
+        const res = await axios.post('/api/woordenspel/try', { word, name });
 
         if(res.status === 200) {
             return res.data;

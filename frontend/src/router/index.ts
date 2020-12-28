@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import Board from '../views/Board.vue';
 import Admin from '../views/Admin.vue';
 
 Vue.use(VueRouter)
@@ -15,6 +16,11 @@ const routes: Array<RouteConfig> = [
     path: '/admin',
     name: 'Admin',
     component: Admin
+  },
+  {
+    path: '/board',
+    name: 'Board',
+    component: Board
   }
 ]
 

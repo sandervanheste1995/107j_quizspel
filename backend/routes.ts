@@ -3,6 +3,7 @@ import { state } from './state/gameState';
 import express from 'express';
 import minigames from './resources/minigames';
 import woordenspelRoutes from './minigames/woordenspel.routes';
+import * as _ from 'underscore';
 
 const routes = express.Router({ mergeParams: true });
 
@@ -12,6 +13,15 @@ routes.get('/state', (_,res) => {
 
 routes.post('/state', (req, res) => {
     state.clientState = req.body;
+    io.emit('GAMESTATE_CHANGED', state.clientState);
+    res.status(204).send();
+});
+
+routes.post('/setPlayer', (req, res) => {
+    const hasTeam = state.clientState.teams.find(t => t.some(i => i === req.body.name.toLowerCase().trim())) !== undefined;
+    if (!hasTeam) {
+        state.clientState.teams[req.body.team - 1].push(req.body.name);
+    }
     io.emit('GAMESTATE_CHANGED', state.clientState);
     res.status(204).send();
 });
@@ -32,7 +42,7 @@ routes.post('/minigames', (req, res) => {
     };
     state.minigameIndex = state.minigameStack.length;
     state.minigameStack.push(state.clientState.minigameData);
-    state.clientState.viewName = 'Woordenspel';
+    state.clientState.viewName = minigame.type as 'Woordenspel';
     io.emit('GAMESTATE_CHANGED', state.clientState);
     res.status(204).send();
 });

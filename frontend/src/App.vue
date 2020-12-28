@@ -12,9 +12,9 @@ export default Vue.extend({
     this.$store.dispatch('getGameState');
 
     // extra voorzorgsmaatregel: update de gamestate elke 8 seconde
-    setInterval(() => {
-      this.$store.dispatch('getGameState');
-    }, 8000);
+    // setInterval(() => {
+    //   this.$store.dispatch('getGameState');
+    // }, 8000);
   }
 });
 </script>
@@ -58,5 +58,13 @@ p, h1, h2, h3 {
   .control {
     margin: 0 auto;
   }
+}
+
+//animations
+.list-slide-enter-active, .list-slide-leave-active {
+  transition: all 0.85s;
+}
+.list-slide-enter, .list-slide-leave-to  {
+  transform: translateY(100vh);
 }
 </style>

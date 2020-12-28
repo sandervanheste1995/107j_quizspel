@@ -12,10 +12,16 @@
         </template>
 
         <template v-if="minigame.started && !countdown && !trying">
-            <b-field label="Voer hier in:">
-                <b-input v-model="word"></b-input>
-            </b-field>
-            <b-button :disabled="word.length === 0" type="is-black" rounded class="has-text-weight-bold" @click="tryWord">Probeer!</b-button>
+            <form method="post" @submit.prevent="tryWord">
+                <b-field label="Voer hier in:">
+                    <b-input v-model="word" ref="wordInput"></b-input>
+                </b-field>
+                <b-button :disabled="word.length === 0" 
+                          native-type="submit"
+                          type="is-black" rounded 
+                          class="has-text-weight-bold">Probeer!
+                </b-button>
+            </form>
         </template>
 
         <stretch class="spinner" v-if="trying"></stretch>
@@ -60,6 +66,7 @@ export default Vue.extend({
             }
             this.word = '';
             this.trying = false;
+            setTimeout(() => (this.$refs.wordInput as any)?.focus(), 33);
         }
     },
     watch: {

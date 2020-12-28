@@ -1,14 +1,19 @@
 import config from '../config';
-import { GameState } from "../shared/GameState";
+import { GameState, teamCount } from "../shared/GameState";
 const fs = require('fs');
 
 const defaultState = {
     minigameIndex: -1,
     minigameStack: [],
     clientState: {
-        viewName: 'Home',   
+        teams: [],
+        viewName: 'Home',
     }
 };
+
+for(var i = 0; i < teamCount; ++i) {
+    defaultState.clientState.teams.push([]);
+}
 
 export const state: { 
     minigameIndex: number,

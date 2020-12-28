@@ -15,14 +15,22 @@ const storeObject: StoreOptions<StoreState> = {
     name: '',
     team: 0,
     gameState: {
-      viewName: 'Home'
+      viewName: 'Home',
+      teams: []
     }
   },
   getters: {
     gameState: state => state.gameState,
     minigame: state => state.gameState.minigameData,
-    teamScore: state => {
-      return state.gameState.minigameData?.scores.reduce((acc, s) => s.teamId === state.team ? acc + s.score : 0, 0);
+    teamNumber: state => state.gameState.teams.findIndex(t => t.find(p => p === state.name)) + 1,
+    teamNumberByPlayerId: state => (playerId: string) => state.gameState.teams.findIndex(t => t.find(p => p === playerId)) + 1,
+    teamScore: (state, getters) => {
+      return state.gameState.minigameData?.scores
+      .reduce((acc, s) => getters.teamNumberByPlayerId(s.playerId) === state.team ? acc + s.score : 0, 0);
+    },
+    teamScoreByTeamnumber: (state, getters) => (team: number) => {
+      return state.gameState.minigameData?.scores
+      .reduce((acc, s) => getters.teamNumberByPlayerId(s.playerId) === team ? acc + s.score : 0, 0);
     }
   },
   mutations: {
@@ -41,6 +49,9 @@ const storeObject: StoreOptions<StoreState> = {
     }
   },
   actions: {
+    async setPlayer () {
+      await apiService.setPlayer();
+    },
     async getGameState ({commit}) {
       const res = (await apiService.getGameState());
 
@@ -60,13 +71,13 @@ const storeObject: StoreOptions<StoreState> = {
     async stopMinigame () {
       await apiService.stopMinigame();
     },
-    broadcastGameState(_, gameState: GameState) {
-        apiService.broadcastGamestate(gameState);
-    },
 
     // Woordespel
     async tryWord({ state }, word: string) {
-      return await apiService.tryWord(word, state.name, state.team);
+      if (!word) {
+        return;
+      }
+      return await apiService.tryWord(word, state.name);
     }
   }
 };

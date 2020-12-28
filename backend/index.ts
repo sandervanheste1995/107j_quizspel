@@ -14,12 +14,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'frontend')));
 app.use('/api', routes);
 
-app.get('/', (req,res) => {
+app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname, 'frontend/index.html'));
 });
 
 const server = app.listen(port, () => {
-    console.log(`Server listening on the port::${port}`);
+    console.log(`Server listening on port::${port}`);
 });
 
 export const io = require('socket.io')(server, {
