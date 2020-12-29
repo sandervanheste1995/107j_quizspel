@@ -60,7 +60,6 @@ input {
 
 * {
   text-align: center;
-  user-select: none;
 }
 
 .field {
