@@ -1,8 +1,14 @@
 <template>
 <div>
-    <b-button type="is-danger" v-if="!claimed && !won && !otherTeamWon" @click="claim">Claim!</b-button>
-    <h1 class="title" v-if="won">Gefeliciteerd! Jouw team heeft {{ currAmount }} euro gewonnen!</h1>
-    <h1 class="title" v-if="otherTeamWon">Verdorie, team {{ otherTeamWon }} gaat er met de prijs vandoor. Ze krijgen {{ currAmount }} euro :(</h1>
+    <template v-if="!minigame.started">
+        <h1 class="title">{{ minigame.name }}</h1>
+        <p>{{ minigame.description }}</p>
+    </template>
+    <template v-if="minigame.started">
+        <b-button type="is-danger" class="stop-btn" v-if="!won && !otherTeamWon" :disabled="claimed" @click="claim" rounded>STOP!</b-button>
+        <h1 class="title" v-if="won">Gefeliciteerd! Jouw team heeft {{ currAmount }} euro gewonnen!</h1>
+        <h1 class="title" v-if="otherTeamWon">Verdorie, team {{ otherTeamWon }} gaat er met de prijs vandoor. Ze krijgen {{ currAmount }} euro :(</h1>
+    </template>
 </div>
 </template>
 
@@ -17,7 +23,7 @@ export default Vue.extend({
             return this.minigame.extraData.currentAmount;
         },
         claimed () {
-            return this.minigame.extraData.claimedPlayers.indexOf((p: string) => p === this.$store.state.name) !== -1;
+            return this.minigame.extraData.claimedPlayers.find((p: string) => p === this.$store.state.name);
         },
         won () {
             return this.minigame.extraData.teamWon === this.$store.state.team;
@@ -37,3 +43,9 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style lang="scss">
+.stop-btn {
+    font-size: 100px;
+}
+</style>

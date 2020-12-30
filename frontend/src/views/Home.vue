@@ -1,7 +1,7 @@
 <template>
   <div class="centered-content">
     <div v-if="!$store.state.name || gameState.viewName === 'Home'" class="home-content">
-      <h1 class="title">Welkom bij het 107J Nieuwjaarsspel!</h1>
+      <h1 class="title">Welkom bij het 107Jeuj Nieuwjaarsspel!</h1>
       <b-icon
         pack="fas"
         icon="glass-cheers"
@@ -18,7 +18,7 @@
                 v-for="team in teamCount"
                 :value="team"
                 :key="team">
-                {{ 'Team ' + ' ' + team }}
+                {{ teamName(team) }}
             </option>
           </b-select>
         </b-field>
@@ -56,7 +56,7 @@ export default Vue.extend({
     Riser
   },
   computed: {
-    ...mapGetters(['gameState', 'teamCount'])
+    ...mapGetters(['gameState', 'teamCount', 'teamName'])
   },
   methods: {
     setNameTeam () {

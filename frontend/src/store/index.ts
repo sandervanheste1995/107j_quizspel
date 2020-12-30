@@ -20,6 +20,15 @@ const storeObject: StoreOptions<StoreState> = {
     }
   },
   getters: {
+    teamName: state => (teamNumber: number) => {
+      if(!teamNumber) {
+        return undefined;
+      }
+      switch(teamNumber) {
+        default:
+         return 'Team ' + teamNumber;
+      }
+    },
     gameState: state => state.gameState,
     minigame: state => state.gameState.minigameData,
     teamNumber: (state, getters) => getters.teamNumberByPlayerId(state.name),

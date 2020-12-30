@@ -14,7 +14,7 @@
             </h1>
 
             <h1 class="title" v-if="teamWon">
-                Team {{ teamWon }} heeft gewonnen!
+                {{ teamName(teamWon) }} heeft gewonnen!
             </h1>
         </template>
     </div>
@@ -27,7 +27,7 @@ import sounds from '@/assets/sounds/loaded-sounds';
 
 export default Vue.extend({
     computed: {
-        ...mapGetters(['minigame']),
+        ...mapGetters(['minigame', 'teamName']),
         started () {
             return this.minigame.started;
         },
@@ -39,6 +39,8 @@ export default Vue.extend({
         started (newValue) {
             if(newValue) {
                 sounds.sletjes.play();
+            } else {
+                 sounds.sletjes.pause();
             }
         },
         teamWon (newValue) {
@@ -47,6 +49,9 @@ export default Vue.extend({
                 sounds.cash.play();
             }
         }
+    },
+    beforeDestroy () {
+        sounds.sletjes.stop();
     }
 });
 </script>

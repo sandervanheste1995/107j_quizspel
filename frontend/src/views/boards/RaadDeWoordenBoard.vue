@@ -1,7 +1,7 @@
 <template>
     <div class="content-wrapper">
         <div v-for="team in teamCount" :key="team">
-            <p class="has-text-weight-bold pt-3">Team {{team}}</p>
+            <p class="has-text-weight-bold pt-3">{{teamName(team)}}</p>
             <transition-group name="list-slide">
                 <p class="has-text-weight-bold pt-1 word" 
                 v-for="word in teamWords(team)" 
@@ -18,7 +18,7 @@ import sounds from '@/assets/sounds/loaded-sounds';
 
 export default Vue.extend({
     computed: {
-        ...mapGetters(['minigame', 'teamNumberByPlayerId', 'teamCount']),
+        ...mapGetters(['minigame', 'teamNumberByPlayerId', 'teamCount', 'teamName']),
         doneWords (): {playerId: string; word: string}[] {
             return this.minigame?.extraData?.doneWords || [];
         }

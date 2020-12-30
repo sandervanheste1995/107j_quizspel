@@ -1,12 +1,13 @@
 <template>
   <div id="app" class="container">
       <router-view />
-      <p class="team-overlay" v-if="team">Team {{ team }}</p>
+      <p class="team-overlay" v-if="teamName">{{ teamName($store.state.team) }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   created () {
@@ -18,9 +19,7 @@ export default Vue.extend({
     }, 8000);
   },
   computed: {
-    team () {
-      return this.$store.state.team;
-    }
+    ...mapGetters(['teamName'])
   }
 });
 </script>

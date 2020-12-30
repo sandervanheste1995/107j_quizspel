@@ -4,7 +4,7 @@
             <h1 class="title pt-5 game-title">{{ minigame.name }}</h1>
             <div class="scores">
                 <div v-for="team in teamCount" :key="team" class="p-3">
-                    <h1 class="title is-6 mb-2">Team {{team}}</h1>
+                    <h1 class="title is-6 mb-2">{{teamName(team)}}</h1>
                     <h1 class="has-text-weight-bold">{{ teamScoreByTeamnumber(team) }}</h1>
                 </div>
             </div>
@@ -29,7 +29,7 @@ export default Vue.extend({
         RiserBoard
     },
     computed: {
-        ...mapGetters(['gameState', 'minigame', 'teamScoreByTeamnumber', 'teamCount'])
+        ...mapGetters(['gameState', 'minigame', 'teamScoreByTeamnumber', 'teamCount', 'teamName'])
     }
 });
 </script>
