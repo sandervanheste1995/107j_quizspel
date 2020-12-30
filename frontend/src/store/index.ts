@@ -27,6 +27,9 @@ const storeObject: StoreOptions<StoreState> = {
     teamScore: (state, getters) => {
       return getters.teamScoreByTeamnumber(state.team);
     },
+    myTeam: (state) => {
+      return state.gameState.teams.find(t => t.indexOf(state.team.toString()) !== -1);
+    },
     teamsEmpty: (state) => !state.gameState.teams?.filter(t => t.length > 0).length,
     teamCount: (state) => {
       return state.gameState.teams.length;
@@ -108,6 +111,11 @@ const storeObject: StoreOptions<StoreState> = {
     },
     async getQuizAnswer() {
       return await apiService.getQuizAnswer();
+    },
+
+    // Riser
+    async riserClaim({ state }) {
+      await apiService.riserClaim(state.team, state.name);
     }
   }
 };

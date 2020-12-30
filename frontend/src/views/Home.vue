@@ -32,6 +32,7 @@
     </div>
     <raad-de-woorden v-else-if="gameState.viewName === 'Woordenspel'" />
     <quiz v-else-if="gameState.viewName === 'Quiz'" />
+    <riser v-else-if="gameState.viewName === 'Riser'" />
   </div>
 </template>
 
@@ -41,6 +42,7 @@ import { mapGetters } from 'vuex';
 import mutations from '@/store/mutations';
 import RaadDeWoorden from './minigames/RaadDeWoorden.vue'
 import Quiz from './minigames/Quiz.vue';
+import Riser from './minigames/Riser.vue'
 
 export default Vue.extend({
   name: 'Home',
@@ -50,7 +52,8 @@ export default Vue.extend({
   }),
   components: {
     RaadDeWoorden,
-    Quiz
+    Quiz,
+    Riser
   },
   computed: {
     ...mapGetters(['gameState', 'teamCount'])

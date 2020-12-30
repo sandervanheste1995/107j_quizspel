@@ -1,3 +1,4 @@
+import { amountchanger } from './minigames/riser.routes';
 import config from './config';
 import { io } from './index';
 import { state } from './state/gameState';
@@ -5,7 +6,9 @@ import express from 'express';
 import minigames from './resources/minigames';
 import woordenspelRoutes from './minigames/woordenspel.routes';
 import quizRoutes, { loadCurrentQuizScreen } from './minigames/quiz.routes';
+import riserRoutes from './minigames/riser.routes';
 import * as _ from 'underscore';
+
 const fs = require('fs');
 
 const routes = express.Router({ mergeParams: true });
@@ -25,6 +28,10 @@ routes.post('/reset', (_, res) => {
     state.minigameStack = defaultState.minigameStack;
     if (fs.existsSync(config.gameStateSavefile)) {
         fs.unlinkSync(config.gameStateSavefile);
+    }
+    if (amountchanger.interval) {
+        clearInterval(amountchanger.interval);
+        amountchanger.interval = undefined;
     }
     io.emit('GAMESTATE_CHANGED', { reset: true });
     res.status(204).send();
@@ -81,6 +88,13 @@ routes.post('/minigames', (req, res) => {
         loadCurrentQuizScreen();
     }
 
+    if (minigame.type === 'Riser') {
+        state.clientState.minigameData.extraData.currentAmount = 0;
+        state.clientState.minigameData.extraData.maxAmount = minigame.maxAmount;
+        state.clientState.minigameData.extraData.claimedPlayers = [];
+        state.clientState.minigameData.extraData.teamWon = 0
+    }
+
     state.minigameIndex = state.minigameStack.length;
     state.minigameStack.push(state.clientState.minigameData);
     state.clientState.viewName = minigame.type as 'Woordenspel' | 'Quiz';
@@ -91,6 +105,16 @@ routes.post('/minigames', (req, res) => {
 routes.post('/minigame/toggle', (_, res) => {
     if (state.clientState.minigameData) {
         state.clientState.minigameData.started = !state.clientState.minigameData.started;
+
+        if(state.clientState.viewName === 'Riser') {
+            if(state.clientState.minigameData.started && !state.clientState.minigameData.extraData.teamWon) {
+                amountchanger.interval = setInterval(amountchanger.func, 1000);
+            } else {
+                clearInterval(amountchanger.interval);
+                amountchanger.interval = undefined;
+            }
+        }
+
         io.emit('GAMESTATE_CHANGED', state.clientState);
     }
     res.status(204).send();
@@ -101,6 +125,8 @@ routes.post('/minigame/stop', (_, res) => {
         state.minigameStack[state.minigameIndex] = state.clientState.minigameData;
         delete state.clientState.minigameData;
         state.clientState.viewName = 'Home';
+        clearInterval(amountchanger.interval);
+        amountchanger.interval = undefined;
         io.emit('GAMESTATE_CHANGED', state.clientState);
     }
     res.status(204).send();
@@ -108,5 +134,6 @@ routes.post('/minigame/stop', (_, res) => {
 
 routes.use('/woordenspel', woordenspelRoutes);
 routes.use('/quiz', quizRoutes);
+routes.use('/riser', riserRoutes);
 
 export default routes;

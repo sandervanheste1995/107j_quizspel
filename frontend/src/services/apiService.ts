@@ -89,4 +89,9 @@ export default class ApiService {
 
         return undefined;
     }
+
+    // Riser minigame
+    async riserClaim(team: number, name: string) {
+        await axios.post('/api/riser/claim', { team, name });
+    }
 }

@@ -61,6 +61,13 @@ const minigames = fs.existsSync(config.minigamesSavefile) ? JSON.parse(fs.readFi
                 answer: ['Sander Vanheste', 'sandrvanheste', 'sandervanheste']
             }
         ]
+    },
+    {
+        id: 3,
+        type: 'Riser',
+        name: 'Gierig, of niet?',
+        description: 'Ja, we zullen eens zien hoe gierig jij bent...',
+        maxAmount: 60
     }
 ];
 
