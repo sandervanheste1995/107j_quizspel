@@ -25,6 +25,12 @@ const storeObject: StoreOptions<StoreState> = {
         return undefined;
       }
       switch(teamNumber) {
+        case 2: 
+          return 'Team MaffeBorrelaars'
+        case 3:
+          return 'Team CrispyM&M'
+        case 4:
+          return 'Team Vegalezzlelaars'
         default:
          return 'Team ' + teamNumber;
       }
