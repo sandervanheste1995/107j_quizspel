@@ -101,8 +101,8 @@ export default Vue.extend({
     flex-wrap: wrap;
     justify-content: center;
     > div, video {
-       background-size: cover;
-       background-position: center;
+       background-size: contain;
+       background-repeat: no-repeat;
        margin: 1.5rem;
        max-width: 60vw;
        max-height: 60vh;
