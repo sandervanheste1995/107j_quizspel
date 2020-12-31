@@ -93,8 +93,13 @@ export default Vue.extend({
             }
         },
         success(newValue) {
-            if (newValue) {
+            if (newValue && this.doneVoting) {
                 sounds.correct.play();
+            }
+        },
+        doneVoting (newValue) {
+            if (newValue && !this.success) {
+                sounds.fail.play();
             }
         }
     }
