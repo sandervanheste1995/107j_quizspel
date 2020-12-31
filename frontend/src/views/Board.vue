@@ -11,6 +11,7 @@
             <raad-de-woorden-board v-if="gameState.viewName === 'Woordenspel'" class="minigame" />
             <quiz-board v-if="gameState.viewName === 'Quiz'" class="minigame" />
             <riser-board v-if="gameState.viewName === 'Riser'" class="minigame" />
+            <guesser-board v-if="gameState.viewName === 'Guesser'" class="minigame" />
         </div>
     </div>
 </template>
@@ -21,12 +22,14 @@ import {mapGetters} from 'vuex';
 import RaadDeWoordenBoard from './boards/RaadDeWoordenBoard.vue';
 import QuizBoard from './boards/QuizBoard.vue';
 import RiserBoard from './boards/RiserBoard.vue';
+import GuesserBoard from './boards/GuesserBoard.vue';
 
 export default Vue.extend({
     components: { 
         RaadDeWoordenBoard,
         QuizBoard,
-        RiserBoard
+        RiserBoard,
+        GuesserBoard
     },
     computed: {
         ...mapGetters(['gameState', 'minigame', 'teamScoreByTeamnumber', 'teamCount', 'teamName'])

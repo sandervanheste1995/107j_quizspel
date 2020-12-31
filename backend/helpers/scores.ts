@@ -7,7 +7,7 @@ export const addToTeamScore = (playerId: string, amount: number) => {
         state.clientState.minigameData.scores.push({ playerId: playerId, score: 0 });
         playerScore = state.clientState.minigameData.scores[state.clientState.minigameData.scores.length - 1];
     }
-    console.log('eagiufhewji' + amount);
+
     playerScore.score += amount;
 }
 

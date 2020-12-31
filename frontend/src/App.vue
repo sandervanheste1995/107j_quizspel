@@ -80,10 +80,16 @@ input {
 
 //animations
 .list-slide-enter-active, .list-slide-leave-active {
-  transition: all 0.85s;
+  transition: all 1s;
 }
 .list-slide-enter, .list-slide-leave-to  {
   transform: translateY(100vh);
+}
+.list-slide-right-enter-active, .list-slide-right-leave-active {
+  transition: all 1s;
+}
+.list-slide-right-enter, .list-slide-right-leave-to  {
+  transform: translateX(100vh);
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1.5s;

@@ -68,6 +68,14 @@ const minigames = fs.existsSync(config.minigamesSavefile) ? JSON.parse(fs.readFi
         name: 'Gierig, of niet?',
         description: 'Ja, we zullen eens zien hoe gierig jij bent...',
         maxAmount: 60
+    },
+    {
+        id: 4,
+        type: 'Guesser',
+        name: 'Ken je huisgenoten',
+        description: 'We zullen eens zien hoe goed jij je huisgenoten kent...',
+        correct: 20,
+        allCorrect: 50
     }
 ];
 

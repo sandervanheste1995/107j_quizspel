@@ -125,6 +125,17 @@ const storeObject: StoreOptions<StoreState> = {
     // Riser
     async riserClaim({ state }) {
       await apiService.riserClaim(state.team, state.name);
+    },
+
+    // Guesser
+    async vote ({ state} , voteRight: boolean) {
+      await apiService.guesserVote(state.team, state.name, voteRight);
+    },
+    async sendText( { state}, message: string) {
+      await apiService.guesserSendText(state.name, message);
+    },
+    async guesserNextPlayer() {
+      await apiService.guesserNextPlayer();
     }
   }
 };

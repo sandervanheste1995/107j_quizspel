@@ -37,6 +37,10 @@
                 <b-button @click="() => quizSchermDelta(1)" class="m-2" type="is-info">Volgende scherm</b-button>
             </div>
 
+            <div v-if="guesserDoneVoting && this.minigame.extraData.playerQueue.length">
+                <b-button @click="guesserNextPlayer" class="m-2" type="is-info">Volgende speler</b-button>
+            </div>
+
             <b-button @click="resetSpel" class="resetButton" type="is-danger">Reset spel</b-button>
         </div>
     </div>
@@ -53,7 +57,11 @@ export default Vue.extend({
         numberOfTeams: 3
     }),
     computed: {
-        ...mapGetters(['gameState', 'teamsEmpty'])
+        ...mapGetters(['gameState', 'teamsEmpty', 'minigame']),
+         guesserDoneVoting () {
+            return this.gameState?.viewName === 'Guesser' && 
+                   this.minigame?.extraData?.votes?.length === this.minigame?.extraData?.numberOfPlayers - 2;
+        }
     },
     async created () {
         this.minigames = await this.$store.dispatch('getMinigames');
@@ -77,9 +85,13 @@ export default Vue.extend({
                 this.$store.dispatch('reset');
             }
         },
+
         // minigame-specifieke knoppen
         quizSchermDelta (delta: number) {
             this.$store.dispatch('quizSchermDelta', delta);
+        },
+        guesserNextPlayer () {
+            this.$store.dispatch('guesserNextPlayer');
         }
     }
 });

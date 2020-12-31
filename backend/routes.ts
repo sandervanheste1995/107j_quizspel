@@ -7,6 +7,7 @@ import minigames from './resources/minigames';
 import woordenspelRoutes from './minigames/woordenspel.routes';
 import quizRoutes, { loadCurrentQuizScreen } from './minigames/quiz.routes';
 import riserRoutes from './minigames/riser.routes';
+import guesserRoutes from './minigames/guesser.routes';
 import * as _ from 'underscore';
 
 const fs = require('fs');
@@ -81,18 +82,45 @@ routes.post('/minigames', (req, res) => {
         extraData: { }
     };
 
+    const extraData = state.clientState.minigameData.extraData;
+
     if (minigame.type === 'Quiz') {
-        state.clientState.minigameData.extraData.screenIndex = 0;
-        state.clientState.minigameData.extraData.teamsAnswered = [];
-        state.clientState.minigameData.extraData.currentScreen = { };
+        extraData.screenIndex = 0;
+        extraData.teamsAnswered = [];
+        extraData.currentScreen = { };
         loadCurrentQuizScreen();
     }
 
     if (minigame.type === 'Riser') {
-        state.clientState.minigameData.extraData.currentAmount = 0;
-        state.clientState.minigameData.extraData.maxAmount = minigame.maxAmount;
-        state.clientState.minigameData.extraData.claimedPlayers = [];
-        state.clientState.minigameData.extraData.teamWon = 0
+        extraData.currentAmount = 0;
+        extraData.maxAmount = minigame.maxAmount;
+        extraData.claimedPlayers = [];
+        extraData.teamWon = 0
+    }
+
+    if (minigame.type === 'Guesser') {
+        const flattenedTeams = _.flatten(state.clientState.teams);
+        extraData.numberOfPlayers = flattenedTeams.length;
+        extraData.playerQueue = _.shuffle(flattenedTeams);
+        extraData.imitatorQueue = _.shuffle(flattenedTeams);
+
+        let limit = 1000000;
+        let reshuffle = true;
+        while(reshuffle && limit > 0) {
+            reshuffle = false;
+            for (var i = 0; i < extraData.playerQueue.length; ++i) {
+                if (extraData.playerQueue[i] === extraData.imitatorQueue[i]) {
+                    reshuffle = true;
+                    extraData.imitatorQueue = _.shuffle(flattenedTeams);
+                }
+            }
+            limit--;
+        }
+
+        extraData.playerText = '';
+        extraData.imitatorText = '';
+        extraData.isReversed = Math.random() >= 0.5;
+        extraData.votes = [];
     }
 
     state.minigameIndex = state.minigameStack.length;
@@ -135,5 +163,6 @@ routes.post('/minigame/stop', (_, res) => {
 routes.use('/woordenspel', woordenspelRoutes);
 routes.use('/quiz', quizRoutes);
 routes.use('/riser', riserRoutes);
+routes.use('/guesser', guesserRoutes);
 
 export default routes;

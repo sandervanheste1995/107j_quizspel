@@ -1,6 +1,5 @@
 import config from '@/config';
 import mutations from '@/store/mutations';
-import { GameState } from '@shared/GameState';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import { Store } from 'vuex';
@@ -77,6 +76,7 @@ export default class ApiService {
         if(res.status === 200) {
             return res.data;
         }
+
         return {success: false, message: 'Fout bij het checken'};
     }
 
@@ -93,5 +93,16 @@ export default class ApiService {
     // Riser minigame
     async riserClaim(team: number, name: string) {
         await axios.post('/api/riser/claim', { team, name });
+    }
+
+    // Guesser minigame
+    async guesserVote(team: number, name: string, voteRight: boolean) {
+        await axios.post('/api/guesser/vote', { team, name, voteRight });
+    }
+    async guesserSendText(name: string, message: string) {
+        await axios.post('/api/guesser/setText', { name, message });
+    }
+    async guesserNextPlayer() {
+        await axios.post('/api/guesser/nextPlayer');
     }
 }
