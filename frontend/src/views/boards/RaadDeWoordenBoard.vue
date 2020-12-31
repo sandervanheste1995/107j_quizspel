@@ -50,6 +50,7 @@ export default Vue.extend({
 
 .word {
     color: $ternary;
+    font-size: 26px;
     > span {
         color: $ternary;
     }
