@@ -172,43 +172,229 @@ const minigames = fs.existsSync(config.minigamesSavefile) ? JSON.parse(fs.readFi
     {
         id: 5,
         type: 'Quiz',
-        name: 'DE 2020 QUIZ',
-        description: 'Deze quiz gaat over 2020, want er is zoveel leuks gebeurd natuurlijk!',
+        name: 'DE NIEUWJAARSQUIZ',
+        description: 'Deze quiz gaat over kerst en oud-en-nieuw gerelateerde zaken. En wat dingen over 2020, wat dat was een geweldig jaar natuurlijk!',
         screens: [
             {
                 type: 'info',
-                text: 'Hieronder staan wat <strong>nutteloze</strong> plaatjes! Hier kan je helemaal niets mee :)',
-                subtext: 'In de kamelen zwemmen de vleeshonden! Ze kwaken!',
-                images: ['https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U', 
-                         'tester.jpg'],
-                videos: ['testquiz.mp4'],
-                sounds: ['woosh.mp3']
+                text: 'Hier volgt een filmpje, en daarna een vraag erover!',
+                subtext: 'Let op, hij wordt maar 1 keer afgespeeld...',
+                videos: ['medley.mp4']
             },
             {
                 type: 'multiplechoice',
-                text: 'Dit is toch makkelijk?',
-                subtext: 'Wat is 17*2?',
-                images: ['https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U'],
+                text: 'Welke impressie kwam niet in het filmpje voor?',
+                subtext: '10 euro voor het goede antwoord',
+                reward: 10,
                 answers: [
                     {
+                        text: 'Frank Sinatra'
+                    },
+                    {
+                        text: 'Amy Whinehouse'
+                    },
+                    {
                         correct: true,
-                        text: 'Dat is 34'
+                        text: 'Whitney Houston'
                     },
                     {
-                        text: 'Dat is 25'
-                    },
-                    {
-                        text: 'Dat is 154'
+                        text: 'Prince'
                     }
                 ]
             },
             {
                 type: 'open',
-                text: 'Hoe heet Sander Vanheste?',
-                subtext: 'jazekers :)',
-                reward: 20,
-                answer: ['Sander Vanheste', 'sandrvanheste', 'sandervanheste']
-            }
+                text: 'Hoe heet de nieuwe Disney Pixar film die vorige week is uitgekomen?',
+                subtext: '5 euris voor het antwoord',
+                reward: 5,
+                answer: ['Soul', 'saul']
+            },
+            {
+                type: 'info',
+                videos: ['soul.jpg']
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Kies de goede volgorde van wanneer deze kerstliedjes uitkwamen',
+                subtext: '10 ekken voor het goede antwoord',
+                sounds: ['lastchristmas.mp3', 'letissnow.mp3','shahnthechristmassong.mp3','thankgodits.mp3'],
+                answers: [
+                    {
+                        correct: true,
+                        text: '2, 4, 1, 3'
+                    },
+                    {
+                        text: '4, 1, 2, 3'
+                    },
+                    {
+                        text: '2, 3, 4, 1'
+                    },
+                    {
+                        text: '4, 2, 1, 3'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Welke van de volgende films bestaat niet?',
+                subtext: '5 euro voor elk team die dit weet',
+                images: ['netflix_movies.jpg'],
+                reward: 5,
+                answers: [
+                    {
+                        text: 'Grumpy Cat\'s Worst Christmas Ever'
+                    },
+                    {
+                        text: 'Santa and The Ice Cream Bunny'
+                    },
+                    {
+                        correct: true,
+                        text: 'Christmas Wedding Planner: Planned again'
+                    },
+                    {
+                        text: 'A Cinderella Story: Christmas Wish'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Tijdens corona werd heel veel internet gekeken. Wat is de meest bekeken youtube video momenteel?',
+                subtext: 'voor 10 vleeseuro',
+                reward: 10,
+                answers: [
+                    {
+                        text: 'Shape of You'
+                    },
+                    {
+                        text: 'Despacito'
+                    },
+                    {
+                        correct: true,
+                        text: 'Baby Shark Dance'
+                    },
+                    {
+                        text: 'Bath Song'
+                    },
+                    {
+                        text: 'Gangnam Style'
+                    }
+                ]
+            },
+            {
+                type: 'info',
+                text: 'fucking 7.5 miljard mensen, dat slaat toch nergens meer op, wat een kutvideo ook teringzooi',
+                videos: ['babyshark.mp4']
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Hoeveel geregistreerde coronabesmettingen zijn er tot nu toe in totaal in Nederland geweest?',
+                subtext: 'Ik had me voorgenomen om geen coronavragen te stellen, maar ik heb geen inspiratie meer verdorie, dus toch maar. Success ermee',
+                images: ['corona.jpg'],
+                reward: 5,
+                answers: [
+                    {
+                        text: '15'
+                    },
+                    {
+                        text: '956 duizend'
+                    },
+                    {
+                        text: '682 duizend'
+                    },
+                    {
+                        correct: true,
+                        text: '787 duizend'
+                    }
+                ]
+            },
+            {
+                type: 'info',
+                text: 'Nu volgen een paar waar / niet waar vragen, voor 2 euro per stuk'
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Verschillende Iraanse artsen hebben aangeraden om olie op je anus te smeren om het virus te genezen',
+                images: ['anus.jpg'],
+                reward: 2,
+                answers: [
+                    {
+                        text: 'Waar',
+                        correct: true
+                    },
+                    {
+                        text: 'Niet waar'
+                    },
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Als protest tegen corona hebben verschillende plekken in Amerika een anti-coronabeleid ingevoerd: mét mondkapje kom je dan niet binnen.',
+                images: ['mondkapje.png'],
+                reward: 2,
+                answers: [
+                    {
+                        text: 'Waar'
+                    },
+                    {
+                        correct: true,
+                        text: 'Niet waar'
+                    },
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Danny Vera is vorige week voor de tweede keer vader geworden',
+                reward: 2,
+                answers: [
+                    {
+                        text: 'Waar'
+                    },
+                    {
+                        correct: true,
+                        text: 'Niet waar'
+                    },
+                ]
+            },
+            {
+                type: 'info',
+                text: 'Hij is voor de eerste keer vader geworden, niet de tweede keer. HAHAHAH JEZUS ER IS VAST WEL IEMAND INGETRAP MAN WAT GRAPPIG ARSHIGUARS IULG'
+            },
+            {
+                type: 'open',
+                text: 'Wat is het nummer dat dit jaar het meest gestegen is in de top 2000?',
+                subtext: '5 euris voor het antwoord',
+                reward: 5,
+                answer: ['Uncharted', 'ungarted', 'unchartet', 'unchfarted']
+            },
+            {
+                type: 'info',
+                text: 'Uncharted is maar liefst 1635 plekken gestegen!'
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Welk van de volgende nummers staat niet in de top 50 van de top 2000?',
+                images: ['top2000.jpg'],
+                reward: 10,
+                answers: [
+                    {
+                        text: 'Oceaan'
+                    },
+                    {
+                        text: 'In The Air Tonight'
+                    },
+                    {
+                        text: 'Purple Rain'
+                    },
+                    {
+                        correct: true,
+                        text: 'Killing In The Name'
+                    }
+                ]
+            },
+            {
+                type: 'info',
+                text: 'Killing in the name staat namelijk op 51. En hiermee eindig ik deze quiz, want nu wordt het wel erg flauw allemaal'
+            },
         ]
     },
     {
