@@ -1,7 +1,7 @@
 <template>
   <div class="centered-content">
     <div v-if="!$store.state.name || gameState.viewName === 'Home'" class="home-content">
-      <h1 class="title">Welkom bij het 107Jeuj Nieuwjaarsspel!</h1>
+      <h1 class="title">Welkom bij het Jean en Sandy Verjaardagsspel!</h1>
       <b-icon
         pack="fas"
         icon="glass-cheers"

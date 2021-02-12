@@ -19,25 +19,11 @@
             <div v-for="(answer,i) in currentScreen.answers" :key="i" class="multiple-choice">
                 <b-button class="title is-4" type="is-info" rounded @click="() => confirmChoice(i)" :disabled="(confirmedAnswer || submitted) && i !== teamAnswer">
                     <span :style="{position: 'relative', top: submitted || confirmedAnswer ? '-5px' : 0}">{{answer}}</span>
-                    <b-icon
-                        v-if="teamAnswer === i && (submitted || confirmedAnswer)"
-                        pack="fas"
-                        :icon="teamSuccess ? 'check-circle' : 'times-circle'"
-                        :style="{color: teamSuccess ? 'darkgreen' : 'darkred'}"
-                        size="is-medium">
-                    </b-icon>
                 </b-button>
             </div>
         </div>
 
         <template v-else-if="currentScreen.type === 'open'">
-            <b-icon
-                v-if="submitted || confirmedAnswer"
-                pack="fas"
-                :icon="teamSuccess ? 'check-circle' : 'times-circle'"
-                :style="{color: teamSuccess ? 'darkgreen' : 'darkred'}"
-                size="is-large">
-            </b-icon>
             <b-input v-model="teamAnswer" class="mb-5" :disabled="confirmedAnswer || submitted"></b-input>
             <b-button class="title" type="is-info" rounded @click="confirmAnswer" :disabled="confirmedAnswer || submitted || teamAnswer.length === 0">Bevestig</b-button>
         </template>

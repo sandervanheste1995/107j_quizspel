@@ -425,7 +425,240 @@ const minigames = fs.existsSync(config.minigamesSavefile) ? JSON.parse(fs.readFi
         description: 'We zullen eens zien hoe goed jij je huisgenoten kent...',
         correct: 20,
         allCorrect: 30
-    }
+    },
+    {
+        id: 10,
+        type: 'Quiz',
+        name: 'De Sandy Quiz',
+        description: 'De speentonijnen komen in grote getalen. Ze kwaken!',
+        screens: [
+            {
+                type: 'info',
+                text: 'Daar komen ze dan, wat vragen over mij (Sandy)'
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Wat was als kind mijn woordje voor Tomaat?',
+                subtext: '10 punten voor het goede antwoord',
+                reward: 10,
+                images: ['tomato.jpg'],
+                answers: [
+                    {
+                        text: 'Runkie'
+                    },
+                    {
+                        text: 'Tommel'
+                    },
+                    {
+                        correct: true,
+                        text: 'Boema'
+                    },
+                    {
+                        text: 'Trapeze'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Wat is nooit een hobby geweest van mij?',
+                subtext: '10 punten voor het goede antwoord',
+                reward: 10,
+                images: ['hobbies.jpg'],
+                answers: [
+                    {
+                        text: 'Voorstellingen bedenken'
+                    },
+                    {
+                        text: 'Visuele effecten maken'
+                    },
+                    {
+                        text: 'Hutten bouwen'
+                    },
+                    {
+                        correct: true,
+                        text: 'Pokemonkaarten verzamelen'
+                    }
+                ]
+            },
+            {
+                type: 'info',
+                text: 'Ik mocht ook helemaal geen pokemon kijken verdomme, dat was te wild'
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Hoe heette het eerste verhaal dat ik ooit schreef?',
+                subtext: '10 punten voor het goede antwoord',
+                reward: 10,
+                images: ['verhaal.jpeg'],
+                answers: [
+                    {
+                        text: 'De Dolle Dromedaris'
+                    },
+                    {
+                        text: 'De Grijpgrage Baron'
+                    },
+                    {
+                        text: 'De Zwetende Hond'
+                    },
+                    {
+                        correct: true,
+                        text: 'De Zwarte Nacht'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Hoe heette het eerste liedje dat ik ooit schreef?',
+                reward: 10,
+                images: ['liedje.gif'],
+                answers: [
+                    {
+                        text: 'De Drilsergant'
+                    },
+                    {
+                        correct: true,
+                        text: 'De Opblaaspop'
+                    },
+                    {
+                        text: 'Het Lieve Plankje'
+                    },
+                    {
+                        text: 'Het Blubberfeest'
+                    }
+                ]
+            },
+            {
+                type: 'info',
+                text: 'Een paar waar/niet-waartjes voor 5 punten'
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Vroeger vond ik belletje lellen geweldig',
+                reward: 5,
+                images: ['bel.jpg'],
+                answers: [
+                    {
+                        text: 'Waar'
+                    },
+                    {
+                        correct: true,
+                        text: 'Niet Waar'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Ik was vroeger de snelste sprinter van de klas',
+                reward: 5,
+                images: ['sprint.jpg'],
+                answers: [
+                    {
+                        correct: true,
+                        text: 'Waar'
+                    },
+                    {
+                        text: 'Niet Waar'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Op elke basisschoolrapport van mij stond dat ik teveel aan het dromen was',
+                reward: 5,
+                images: ['dream.jpg'],
+                answers: [
+                    {
+                        correct: true,
+                        text: 'Waar'
+                    },
+                    {
+                        text: 'Niet Waar'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Ik heb ooit een kerkdienst verstoord door een keihard, stinkend ploffertje te laten',
+                reward: 5,
+                images: ['church.jpg'],
+                answers: [
+                    {
+                        text: 'Waar'
+                    },
+                    {
+                        correct: true,
+                        text: 'Niet Waar'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Waarom zie je mij altijd onrustig heen en weer bewegen op videos van vroeger?',
+                subtext: 'A) Ik moest altijd naar de wc, maar weigerde dan te gaan (tijdverspilling), B) Mijn kleding kriebelde altijd op irritante wijze, C) Ik had ADHD, D) Dingen duurden mij altijd te lang, ik was ongeduldig',
+                reward: 10,
+                images: ['youngsandy.jpeg'],
+                answers: [
+                    {
+                        correct: true,
+                        text: 'A'
+                    },
+                    {
+                        text: 'B'
+                    },
+                    {
+                        text: 'C'
+                    },
+                    {
+                        text: 'D'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Wat is niet waar?',
+                subtext: 'A) Ik heb een keer iemand geslagen uit woede B) Ik noemde mijn tante soms Mam C) Ik zat in Het Schoolorkest, waar ik wazig wat akkoorden speelde, D) Ik ben nooit de klas uit gestuurd op de middelbare',
+                reward: 10,
+                images: ['youngsandy.jpeg'],
+                answers: [
+                    {
+                        text: 'A'
+                    },
+                    {
+                        text: 'B'
+                    },
+                    {
+                        text: 'C'
+                    },
+                    {
+                        correct: true,
+                        text: 'D'
+                    }
+                ]
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Wat mocht ik WEL als 9-jarige?',
+                subtext: 'A) Nickelodeon kijken B) Een gameboy C) Meer dan 1 snoepje per dag D) Een uur per dag op de computer',
+                reward: 10,
+                images: ['youngsandy.jpeg'],
+                answers: [
+                    {
+                        text: 'A'
+                    },
+                    {
+                        text: 'B'
+                    },
+                    {
+                        correct: true,
+                        text: 'C'
+                    },
+                    {
+                        text: 'D'
+                    }
+                ]
+            },
+        ]
+    },
 ];
 
 export default minigames;
