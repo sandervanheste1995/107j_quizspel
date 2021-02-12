@@ -659,6 +659,163 @@ const minigames = fs.existsSync(config.minigamesSavefile) ? JSON.parse(fs.readFi
             },
         ]
     },
+    {
+        id: 11,
+        type: 'Quiz',
+        name: 'De Jean Quiz',
+        description: 'Daar komt ie dan: de quiz over de enige echte Jean!',
+        screens: [ 
+            {
+                type: 'info',
+                text: 'Daar komen ze dan, wat vragen over mij (Jean)',
+                images: ['1.jpeg']
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Waar ben ik NIET bang voor?',
+                reward: 10,
+                answers: [
+                    {
+                        text: 'Vliegen'
+                    },
+                    {
+                        text: 'Liften'
+                    },
+                    {
+                        text: 'Hoogtes'
+                    },
+                    {
+                        text: 'Horrorfilms'
+                    },
+                    {
+                        correct: true,
+                        text: 'Prank, alles'
+                    }
+                ]
+            },
+            {
+                type: 'open',
+                text: 'Wat is mijn favoriete land?',
+                reward: 10,
+                answer: ['Ierland', 'Irland', 'irland', 'ierlant', 'ierland', 'Ireland', 'ireland']
+            },
+            {
+                type: 'open',
+                text: 'Wat is mijn celebrity crush?',
+                reward: 10,
+                answer: ['Yannick van de Velde, Leonardo DiCaprio, en Frenkie de Jong (ik ben de moeilijkste niet)', 'yannick', 'velde', 'leonardo', 'caprio', 'frenkie', 'jong', 'DiCaprio']
+            },
+            {
+                type: 'open',
+                text: 'Hoe heet mijn broer?',
+                images: ['2.jpeg'],
+                reward: 10,
+                answer: ['Lennart', 'lennard', 'lenard', 'lennart']
+            },
+            {
+                type: 'open',
+                text: 'Wat is mijn lievelingskleur?',
+                reward: 10,
+                answer: ['Geel', 'GEEL', 'geeel', 'geel']
+            },
+            {
+                type: 'open',
+                text: 'Wat was mijn favoriete vak op school?',
+                reward: 10,
+                answer: ['Aardrijkskunde', 'aarderijkkunde', 'aarderijkskudne', 'aaardrijkskunde', 'Aarderijkskunde']
+            },
+            {
+                type: 'open',
+                text: 'Hoeveelste jaars student ben ik? (Alleen een cijfer)',
+                reward: 10,
+                answer: ['5e jaars', '5', '5e']
+            },
+            {
+                type: 'open',
+                text: 'Wat is mijn favoriete toetje?',
+                reward: 10,
+                answer: ['Alles met chocola erin is goed', 'chocola', 'choco', 'Chocola']
+            },
+            {
+                type: 'open',
+                text: 'Hoe oud ben ik op deze foto?',
+                images: ['3.jpeg'],
+                reward: 10,
+                answer: ['15 jaar (Disclaimer: geen druppel alcohol gedronken!)', '15', '15 jaar', 'vijftien']
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Wat is de naam van mijn eerste vriendje?',
+                reward: 10,
+                answers: [
+                    {
+                        correct: true,
+                        text: 'Joost'
+                    },
+                    {
+                        text: 'Jeroen'
+                    },
+                    {
+                        text: 'Jan Pieter'
+                    },
+                    {
+                        text: 'Jorn'
+                    }
+                ]
+            },
+            {
+                type: 'open',
+                text: 'Wat gebeurt er op deze foto?',
+                images: ['4.jpeg'],
+                reward: 10,
+                answer: ['Ik ging bijna out omdat mijn piercing door mijn oor was getrokken op een camping in Frankrijk omdat ik bleef haken achter een campingtafel (GEEN AANRADER)', 'piercing', 'frankrijk']
+            },
+            {
+                type: 'multiplechoice',
+                text: 'Op welke sport heb ik NIET gezeten?',
+                reward: 10,
+                answers: [
+                    {
+                        text: 'Tennis'
+                    },
+                    {
+                        text: 'Volleybal'
+                    },
+                    {
+                        text: 'Zwaardvechten'
+                    },
+                    {
+                        correct: true,
+                        text: 'Paardrijden'
+                    },
+                    {
+                        text: 'Zeilen'
+                    }
+                ]
+            },
+            {
+                type: 'open',
+                text: 'Waar heb ik mijn scriptie over geschreven?',
+                images: ['4.jpeg'],
+                reward: 10,
+                answer: ['Toerisme in Ierse landhuizen', 'toerisme', 'landhuizen']
+            },
+            {
+                type: 'open',
+                text: 'Wat is er bijzonder aan deze foto?',
+                images: ['5.jpeg'],
+                reward: 10,
+                answer: ['Sandy en Jean zitten op de achtergrond', 'sandy', 'jean', 'sander', 'janne']
+            },
+            {
+                type: 'open',
+                text: 'In welke musical heb ik de hoofdrol gespeeld?',
+                images: ['6.jpeg'],
+                reward: 10,
+                answer: ['Frozen!', 'frozen', 'froozen', 'Frozen']
+            },
+        ]
+    }
 ];
 
 export default minigames;
